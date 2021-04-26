@@ -129,7 +129,7 @@ describe('[GAS BENCHMARK] OVM_CanonicalTransactionChain', () => {
     )
   })
 
-  describe('appendSequencerBatch [ @skip-on-coverage ]', () => {
+  describe('appendSequencerBatch [@skip-on-coverage]', () => {
     beforeEach(() => {
       OVM_CanonicalTransactionChain = OVM_CanonicalTransactionChain.connect(
         sequencer

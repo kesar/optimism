@@ -277,7 +277,7 @@ describe('OVM_StateTransitioner', () => {
   })
 
   describe('applyTransaction', () => {
-    it('Blocks execution if insufficient gas provided', async () => {
+    it('Blocks execution if insufficient gas provided [@skip-on-coverage]', async () => {
       const gasLimit = 500_000
       const transaction = {
         timestamp: '0x12',

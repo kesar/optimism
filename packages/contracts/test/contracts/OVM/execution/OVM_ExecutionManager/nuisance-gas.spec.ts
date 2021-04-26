@@ -18,7 +18,7 @@ const FRESH_CALL_NUISANCE_GAS_COST =
   NUISANCE_GAS_COSTS.MIN_NUISANCE_GAS_PER_CONTRACT
 
 const test_nuisanceGas: TestDefinition = {
-  name: 'Basic tests for nuisance gas',
+  name: 'Basic tests for nuisance gas [@skip-on-coverage]',
   preState: {
     ExecutionManager: {
       ovmStateManager: '$OVM_STATE_MANAGER',
