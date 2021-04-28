@@ -21,3 +21,4 @@ curl \
     $L2_URL
 
 yarn test:integration
+cat gas-report.txt
