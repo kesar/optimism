@@ -60,6 +60,9 @@ jobs:
           ENABLE_GAS_REPORT: 1
       - name: Print gas report
         run: cat packages/contracts/gas-report.txt
+      - name: Run codechecks
+        working-directory: ./packages/contracts
+        run: yarn codechecks
   lint:
     name: Linting
     runs-on: ubuntu-latest
