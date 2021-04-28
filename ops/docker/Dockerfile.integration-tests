@@ -22,7 +22,8 @@ COPY --from=builder /optimism/packages/contracts ./packages/contracts
 WORKDIR /opt/optimism/integration-tests
 COPY integration-tests ./
 
-RUN yarn build:integration
+RUN yarn build:contracts
+RUN yarn build:contracts:ovm
 
 COPY ./ops/scripts/integration-tests.sh ./
 ENTRYPOINT yarn test:integration
