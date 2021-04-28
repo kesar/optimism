@@ -4,6 +4,9 @@ pragma experimental ABIEncoderV2;
 
 /* Interface Imports */
 import { iAbs_BaseCrossDomainMessenger } from "../../../iOVM/bridge/messaging/iAbs_BaseCrossDomainMessenger.sol";
+import { iOVM_CanonicalTransactionChain } from "../../../iOVM/chain/iOVM_CanonicalTransactionChain.sol";
+
+import { Lib_AddressResolver } from "../../../libraries/resolver/Lib_AddressResolver.sol";
 
 /* External Imports */
 import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
@@ -17,7 +20,7 @@ import { ReentrancyGuard } from "@openzeppelin/contracts/utils/ReentrancyGuard.s
  * Compiler used: defined by child contract
  * Runtime target: defined by child contract
  */
-abstract contract Abs_BaseCrossDomainMessenger is iAbs_BaseCrossDomainMessenger, ReentrancyGuard {
+abstract contract Abs_BaseCrossDomainMessenger is iAbs_BaseCrossDomainMessenger, ReentrancyGuard, Lib_AddressResolver {
 
     /*************
      * Constants *
@@ -36,7 +39,6 @@ abstract contract Abs_BaseCrossDomainMessenger is iAbs_BaseCrossDomainMessenger,
     mapping (bytes32 => bool) public relayedMessages;
     mapping (bytes32 => bool) public successfulMessages;
     mapping (bytes32 => bool) public sentMessages;
-    uint256 public messageNonce;
     address internal xDomainMsgSender = DEFAULT_XDOMAIN_SENDER;
 
 
@@ -44,7 +46,7 @@ abstract contract Abs_BaseCrossDomainMessenger is iAbs_BaseCrossDomainMessenger,
      * Constructor *
      ***************/
 
-    constructor() ReentrancyGuard() {}
+    constructor(address _libAddressResolver) Lib_AddressResolver(_libAddressResolver) ReentrancyGuard() {}
 
 
     /********************
@@ -77,14 +79,15 @@ abstract contract Abs_BaseCrossDomainMessenger is iAbs_BaseCrossDomainMessenger,
         override
         public
     {
+        uint40 queueLenght = iOVM_CanonicalTransactionChain(resolve("OVM_CanonicalTransactionChain")).getQueueLength();
+        
         bytes memory xDomainCalldata = _getXDomainCalldata(
             _target,
             msg.sender,
             _message,
-            messageNonce
+            queueLenght
         );
 
-        messageNonce += 1;
         sentMessages[keccak256(xDomainCalldata)] = true;
 
         _sendXDomainMessage(xDomainCalldata, _gasLimit);

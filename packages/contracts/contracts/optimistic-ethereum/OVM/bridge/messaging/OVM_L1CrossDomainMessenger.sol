@@ -4,7 +4,6 @@ pragma experimental ABIEncoderV2;
 
 /* Library Imports */
 import { Lib_OVMCodec } from "../../../libraries/codec/Lib_OVMCodec.sol";
-import { Lib_AddressResolver } from "../../../libraries/resolver/Lib_AddressResolver.sol";
 import { Lib_AddressManager } from "../../../libraries/resolver/Lib_AddressManager.sol";
 import { Lib_SecureMerkleTrie } from "../../../libraries/trie/Lib_SecureMerkleTrie.sol";
 
@@ -25,7 +24,7 @@ import { Abs_BaseCrossDomainMessenger } from "./Abs_BaseCrossDomainMessenger.sol
  * Compiler used: solc
  * Runtime target: EVM
  */
-contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCrossDomainMessenger, Lib_AddressResolver {
+contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCrossDomainMessenger {
 
     /***************
      * Constructor *
@@ -34,10 +33,7 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Abs_BaseCros
     /**
      * Pass a default zero address to the address resolver. This will be updated when initialized.
      */
-    constructor()
-        Lib_AddressResolver(address(0))
-    {}
-
+    constructor() Abs_BaseCrossDomainMessenger(address(0)) {}
 
     /**********************
      * Function Modifiers *
