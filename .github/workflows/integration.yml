@@ -34,9 +34,13 @@ jobs:
         working-directory: ./ops
         run: ./scripts/build-ci.sh
 
-      - name: Bring the stack up and run the tests
+      - name: Bring the stack up
         working-directory: ./ops
-        run: docker-compose up --scale integration_tests=1
+        run: docker-compose up -d
+
+      - name: Run the integration tests
+        working-directory: ./ops
+        run: docker-compose run integration_tests
 
       # Examples Tests
       - name: Test & deploy hardhat-example on hardhat (regression)
