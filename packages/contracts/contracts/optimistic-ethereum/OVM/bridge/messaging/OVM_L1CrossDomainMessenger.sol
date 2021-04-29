@@ -194,38 +194,6 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Lib_AddressR
         relayedMessages[relayId] = true;
     }
 
-    /**
-     * Replays a cross domain message to the target messenger.
-     * @inheritdoc iOVM_L1CrossDomainMessenger
-     */
-    function replayMessage(
-        address _target,
-        address _sender,
-        bytes memory _message,
-        uint256 _messageNonce,
-        uint32 _gasLimit
-    )
-        override
-        public
-    {
-        // Check the nonce used exists
-        uint40 queueLength = iOVM_CanonicalTransactionChain(resolve("OVM_CanonicalTransactionChain")).getQueueLength();
-        require(
-            _messageNonce < queueLength,
-            "Provided message has not already been sent."
-        );
-
-        bytes memory xDomainCalldata = _getXDomainCalldata(
-            _target,
-            _sender,
-            _message,
-            _messageNonce
-        );
-
-        _sendXDomainMessage(xDomainCalldata, _gasLimit);
-    }
-
-
     /**********************
      * Internal Functions *
      **********************/

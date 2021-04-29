@@ -126,7 +126,7 @@ describe('OVM_L1CrossDomainMessenger', () => {
     })
   })
 
-  describe('replayMessage', () => {
+  describe.skip('replayMessage', () => {
     const target = NON_ZERO_ADDRESS
     const message = NON_NULL_BYTES32
     const gasLimit = 100_000
