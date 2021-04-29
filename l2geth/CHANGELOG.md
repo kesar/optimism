@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.6
+
+### Patch Changes
+
+- 925675d: Update `scripts/start.sh` to regenesis v0.2.0
+
 ## 0.2.5
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.9
+
+### Patch Changes
+
+- 0ef3069: Add pause(), blockMessage() and allowMessage() to L1 messenger
+- Updated dependencies [28dc442]
+  - @eth-optimism/core-utils@0.4.0
+
 ## 0.2.8
 
 ### Patch Changes
