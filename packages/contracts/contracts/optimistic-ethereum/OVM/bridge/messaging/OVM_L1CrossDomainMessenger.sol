@@ -118,13 +118,13 @@ contract OVM_L1CrossDomainMessenger is iOVM_L1CrossDomainMessenger, Lib_AddressR
         public
     {
         // Use the CTC queue lenght as nonce 
-        uint40 queueLenght = iOVM_CanonicalTransactionChain(resolve("OVM_CanonicalTransactionChain")).getQueueLength();
+        uint40 queueLength = iOVM_CanonicalTransactionChain(resolve("OVM_CanonicalTransactionChain")).getQueueLength();
         
         bytes memory xDomainCalldata = _getXDomainCalldata(
             _target,
             msg.sender,
             _message,
-            queueLenght
+            queueLength
         );
 
         sentMessages[keccak256(xDomainCalldata)] = true;
